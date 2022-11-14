@@ -30,4 +30,4 @@ fi
 
 gatttool -i $interface -b $mac  --characteristics | awk -F "," '{print $3}' | awk -F "= " '{print $2}' > $raw_char
 
-for var in `cat $raw_char`; do echo -e "$var:"; gatttool -b $mac --char-read -a 0x0016|awk -F ": " '{print $2}'|xxd -r -p; echo -e "\n\n";done
+for var in `cat $raw_char`; do echo -e "$var:"; gatttool -b $mac --char-read -a $var|awk -F ": " '{print $2}'|xxd -r -p; echo -e "\n\n";done
